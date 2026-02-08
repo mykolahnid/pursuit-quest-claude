@@ -198,13 +198,15 @@ export default function AdminPage() {
     return <div className="loading">Loading...</div>;
   }
 
-  // Chart data
+  // Chart data — sort by Q1 (anchor) for the line chart
+  const sortedResponses = [...responses].sort((a, b) => a.q1_answer - b.q1_answer);
+
   const lineChartData = {
-    labels: responses.map((_, i) => `P${i + 1}`),
+    labels: sortedResponses.map((_, i) => `P${i + 1}`),
     datasets: [
       {
         label: 'Q1: Chosen Number (1-100)',
-        data: responses.map((r) => r.q1_answer),
+        data: sortedResponses.map((r) => r.q1_answer),
         borderColor: 'rgb(54, 162, 235)',
         backgroundColor: 'rgba(54, 162, 235, 0.1)',
         borderWidth: 2,
@@ -213,7 +215,7 @@ export default function AdminPage() {
       },
       {
         label: 'Q2: Estimated African UN Members',
-        data: responses.map((r) => r.q2_answer),
+        data: sortedResponses.map((r) => r.q2_answer),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.1)',
         borderWidth: 2,
