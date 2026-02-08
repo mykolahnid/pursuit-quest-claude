@@ -15,6 +15,7 @@ export async function POST(request, { params }) {
 
     const body = await request.json();
     const count = Math.min(Math.max(parseInt(body.count, 10) || 30, 1), 500);
+    const mode = body.mode === 'random' ? 'random' : 'correlated';
 
     // Verify session exists
     const sessionRows = await sql`
@@ -24,7 +25,7 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
-    const testData = generateTestData(count);
+    const testData = generateTestData(count, { mode });
 
     // Insert test data
     for (const data of testData) {

@@ -33,6 +33,7 @@ export default function AdminPage() {
   const [correlation, setCorrelation] = useState(null);
   const [newSessionName, setNewSessionName] = useState('');
   const [testDataCount, setTestDataCount] = useState(30);
+  const [testDataMode, setTestDataMode] = useState('correlated');
   const [actionLoading, setActionLoading] = useState('');
 
   // Check auth status
@@ -163,7 +164,7 @@ export default function AdminPage() {
       await fetch(`/api/admin/sessions/${selectedSession.id}/testdata`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ count: testDataCount }),
+        body: JSON.stringify({ count: testDataCount, mode: testDataMode }),
       });
       await loadSessionData(selectedSession.id);
       await loadSessions();
@@ -436,6 +437,13 @@ export default function AdminPage() {
                 value={testDataCount}
                 onChange={(e) => setTestDataCount(parseInt(e.target.value, 10) || 30)}
               />
+              <select
+                value={testDataMode}
+                onChange={(e) => setTestDataMode(e.target.value)}
+              >
+                <option value="correlated">Correlated</option>
+                <option value="random">Random</option>
+              </select>
               <button
                 className="btn btn-primary btn-sm"
                 onClick={handleGenerateTestData}
