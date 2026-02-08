@@ -17,9 +17,9 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    if (!Number.isInteger(q2Num) || q2Num < 0 || q2Num > 1000) {
+    if (!Number.isInteger(q2Num) || q2Num < 0 || q2Num > 100) {
       return NextResponse.json(
-        { error: 'Answer 2 must be an integer between 0 and 1000' },
+        { error: 'Answer 2 must be an integer between 0 and 100' },
         { status: 400 }
       );
     }

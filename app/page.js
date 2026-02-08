@@ -64,7 +64,7 @@ export default function SurveyPage() {
     if (value === '' || isNaN(num)) return 'Please enter a number';
     if (!Number.isInteger(Number(value)) || value.includes('.'))
       return 'Please enter a whole number';
-    if (num < 0 || num > 1000) return 'Number must be between 0 and 1000';
+    if (num < 0 || num > 100) return 'Number must be between 0 and 100';
     return '';
   }, []);
 
@@ -226,7 +226,7 @@ export default function SurveyPage() {
               <input
                 type="number"
                 min="0"
-                max="1000"
+                max="100"
                 step="1"
                 value={q2}
                 onChange={(e) => {
@@ -236,7 +236,7 @@ export default function SurveyPage() {
                 onKeyDown={handleQ2KeyDown}
                 className={q2Error ? 'error' : ''}
                 autoFocus
-                placeholder="0 - 1000"
+                placeholder="0 - 100"
               />
               {q2Error && <div className="error-text">{q2Error}</div>}
               <div className="hint-text">Enter your best guess</div>
